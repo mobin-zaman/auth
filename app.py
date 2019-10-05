@@ -11,7 +11,7 @@ from blacklist import BLACKLIST
 from resources.user import TestDeploymentWorking, MerchantAuthenticationApi, TokenRefresh, MerchantLogout,CheckTokenValidity
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://praccho:97865321@praccho.xyz/auth"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://username:password@localhost/test_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_BLACKLIST_ENABLED"] = True  # enable blacklist feature
@@ -52,4 +52,4 @@ api.add_resource(CheckTokenValidity,'/check_validity/') #internal
 if __name__ == "__main__":
     db.init_app(app)
     ma.init_app(app)
-    app.run(port=5000, debug=True)
+    app.run('0.0.0.0',port=5000, debug=True)

@@ -15,8 +15,8 @@ class MerchantModel(db.Model):
     role = db.Column(db.SmallInteger)
     passphrase = db.Column(db.String(255))
     profile_photo_url = db.Column(db.String(127))
-    inserted_on = db.Column(db.DateTime)
-    updated_on = db.Column(db.DateTime)
+    inserted_on = db.Column(db.TIMESTAMP) #FIXME: add default timestamp here
+    updated_on = db.Column(db.TIMESTAMP) #FIXME: ^ as mentoined above
 
     def __repr__(self):
         return "<User {} {}".format(self.username, self.password_hash)
