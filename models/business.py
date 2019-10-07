@@ -1,7 +1,9 @@
 from db import db
 from sqlalchemy.dialects.mysql import BIGINT
+from models import business_merchant
 
-class BusinessModel(db.Model):
+class Business(db.Model):
+    
     id = db.Column(BIGINT(unsigned=True),primary_key=True)
     name = db.Column(db.String(255))
     owner_name=db.Column(db.String(255))

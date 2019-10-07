@@ -1,10 +1,10 @@
 from db import db
 from sqlalchemy.dialects.mysql import BIGINT
 from passlib.hash import bcrypt as bc
+from models import business_merchant
 
 
-class MerchantModel(db.Model):
-    __tablename__ = "merchant"
+class Merchant(db.Model):
 
     id = db.Column(BIGINT(unsigned=True), primary_key=True)
     name = db.Column(db.String(80))
