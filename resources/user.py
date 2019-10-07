@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from schemas.user_schema import MerchantSchema
+from schemas.business_schema import BusniessUrl
 
 from flask_jwt_extended import create_refresh_token, create_access_token,get_jwt_identity,jwt_refresh_token_required,jwt_required,get_raw_jwt
 from blacklist import BLACKLIST
@@ -40,9 +41,15 @@ class MerchantAuthenticationApi(Resource):
         access_token=create_access_token(identity=user.id,fresh=True)
         refresh_token=create_refresh_token(user.id)
 
+        business_info = user.businesses
+
+        business_info_json = BusniessUrl(many=True).dump(business_info)
+
         return {
             'access_token':access_token,
             'refresh_token':refresh_token,
+            'businesses': business_info_json
+
         }
 
 
@@ -51,7 +58,7 @@ class TokenRefresh(Resource):
     def post(self):
         current_user = get_jwt_identity()
 
-        MerchantModel.query.get_or_404(current_user) #this line will make sure the filteration of invalid access tokens
+        Merchant.query.get_or_404(current_user) #this line will make sure the filteration of invalid access tokens
 
 
         access_token = create_access_token(identity=current_user)

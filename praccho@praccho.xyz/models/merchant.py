@@ -1,8 +1,7 @@
 from db import db
 from sqlalchemy.dialects.mysql import BIGINT
 from passlib.hash import bcrypt as bc
-from models.business import business_merchant
-from models.business import Business
+from models import business_merchant
 
 
 class Merchant(db.Model):
@@ -18,9 +17,6 @@ class Merchant(db.Model):
     profile_photo_url = db.Column(db.String(127))
     inserted_on = db.Column(db.TIMESTAMP) #FIXME: add default timestamp here
     updated_on = db.Column(db.TIMESTAMP) #FIXME: ^ as mentoined above
-
-    """below attributes are not columns, just rlationships"""
-    businesses = db.relationship('Business', backref='businesses', secondary=business_merchant )  #FIXME: what is lazy dynamic?
 
     def __repr__(self):
         return "<User {} {}".format(self.username, self.password_hash)
