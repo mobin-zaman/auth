@@ -4,7 +4,7 @@ from schemas.user_schema import MerchantSchema
 
 from flask_jwt_extended import create_refresh_token, create_access_token,get_jwt_identity,jwt_refresh_token_required,jwt_required,get_raw_jwt
 from blacklist import BLACKLIST
-from models.merchant import MerchantModel
+from models.merchant import Merchant
 from .custom_hash import match_hash
 import time
 
@@ -29,7 +29,7 @@ class MerchantAuthenticationApi(Resource):
         data=MerchantSchema().load(json_input)
         print(data, data)
 
-        user=MerchantModel.find_by_username(data['username'])
+        user=Merchant.find_by_username(data['username'])
 
         if not user:
             return {'errors':'login invalid'},400
@@ -82,7 +82,7 @@ class CheckTokenValidity(Resource):
         current_user = get_jwt_identity()  # getting the user_id from jwt
         print("current: ",current_user)
         #FIXME: the bellow query needs more work to verify the existence of the user, we need to delete the inactive users
-        user = MerchantModel.query.get_or_404(current_user, description="INVALID TOKEN") #Thanks Allah I thought of this test
+        user = Merchant.query.get_or_404(current_user, description="INVALID TOKEN") #Thanks Allah I thought of this test
 
         """stop man in the middle"""
         print("check 1")

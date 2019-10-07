@@ -21,10 +21,10 @@ logger = logging.getLogger('alembic.env')
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from models.business import BusinessModel
-from models.merchant import MerchantModel
+from models.business import Business
+from models.merchant import Merchant
 
-target_metadata = [BusinessModel.metadata, MerchantModel.metadata]
+target_metadata = [Business.metadata, Merchant.metadata]
 from flask import current_app
 
 config.set_main_option(

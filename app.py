@@ -9,6 +9,7 @@ from ma import ma
 from blacklist import BLACKLIST
 
 from resources.user import TestDeploymentWorking, MerchantAuthenticationApi, TokenRefresh, MerchantLogout,CheckTokenValidity
+from resources.cdn import CdnAuthenticationApi
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://username:password@localhost/test_db"
@@ -46,6 +47,7 @@ api.add_resource(MerchantAuthenticationApi, '/auth/')
 api.add_resource(TokenRefresh, '/refresh/')
 api.add_resource(MerchantLogout,'/logout/')
 api.add_resource(CheckTokenValidity,'/check_validity/') #internal
+api.add_resource(CdnAuthenticationApi,'/cdnauth/')
 
 
 
